@@ -10,7 +10,7 @@ DATABASES = {
         # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'ENGINE': 'django.db.backends.sqlite3',
         # Name of the database to use. For SQLite, it's the full path.
-        'NAME': ':memory:',
+        'NAME': 'db.sqlite3',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -96,6 +96,7 @@ INSTALLED_APPS = (
         'tardis.tardis_portal.templatetags',
         'registration',
         'django_nose',
+        'south',
         'haystack',
 
 ) + apps
