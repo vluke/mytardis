@@ -56,6 +56,13 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+class Taggable(models.Model):
+    
+    label = models.CharField(max_length=255)
+    
+    class Meta:
+        abstract = True
+
 class UserProfile(models.Model):
     """
     UserProfile class is an extension to the Django standard user model.
@@ -121,7 +128,7 @@ class UserAuthentication(models.Model):
         return self.username + ' - ' + self.getAuthMethodDescription()
 
 
-class Experiment(models.Model):
+class Experiment(Taggable):
     """The ``Experiment`` model inherits from :class:`django.db.models.Model`
 
     :attribute url: **Undocumented**
@@ -320,7 +327,7 @@ class Author_Experiment(models.Model):
         unique_together = (('experiment', 'author'),)
 
 
-class Dataset(models.Model):
+class Dataset(Taggable):
     """Class to link datasets to experiments
 
     :attribute experiment: a forign key to the
@@ -378,7 +385,7 @@ class Dataset(models.Model):
         return path.join(self.experiment.get_absolute_filepath(), str(self.id))
 
 
-class Dataset_File(models.Model):
+class Dataset_File(Taggable):
     """Class to store meta-data about a physical file
 
     :attribute dataset: the foreign key to the
