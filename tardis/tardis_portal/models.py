@@ -1095,7 +1095,7 @@ def post_save_author_experiment(sender, **kwargs):
     author_experiment = kwargs['instance']
     try:
         _publish_public_expt_rifcs(author_experiment.experiment)
-    except Experiment.DoesNotExist:
+    except:
         # If for some reason the experiment is missing, then ignore update
         pass
 
