@@ -172,6 +172,8 @@ class AuthService():
                 # get_user returns either a User or a dictionary describing a
                 # user (id, display, email, first_name, last_name).
                 user = self._authentication_backends[authMethod].get_user(user_id)
+                if user is None and force_user_create:
+                    user = { 'id': user_id }
             except NotImplementedError, AttributeError:
                 # For backwards compatibility
                 try:
@@ -187,7 +189,7 @@ class AuthService():
                         user = { 'id': user_id }
 
             if isinstance(user, dict):
-                user_dict = user
+                user_dict = user              
                 user = self._get_or_create_user_from_dict(user_dict, authMethod)
 
         if user is None:
